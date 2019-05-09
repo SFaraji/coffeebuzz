@@ -60,7 +60,7 @@ styleCLink();
     <!-- PAYMENT PROCESSING -->
 
     <body class="text-center">
-    <form class="form-signin" id='loginForm'>
+    <form class="form-signin" id='orderForm'>
       <h1 class="h3 mb-3 font-weight-normal">Customer Details</h1>
 
       <label for="name" class="sr-only">Name</label>
@@ -74,9 +74,31 @@ styleCLink();
       <!-- TEST PAYPAL ACCOUNT DETAILS:
         email: leeroy@gmail.com
         password: jenkins1
+
+        reference: https://developer.paypal.com/docs/checkout/integrate/#5-capture-the-transaction
       -->
-      <script src="https://www.paypal.com/sdk/js?client-id=sb?currency=AUD"></script>
-      <script>paypal.Buttons().render('#loginForm');</script>
+      <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
+      <script>
+        paypal.Buttons({
+          createOrder: function(data, actions) {
+            // Set up the transaction
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: '0.01'
+                }
+              }]
+            });
+          },
+          onApprove: function(data, actions) {
+            // Capture the funds from the transaction
+            return actions.order.capture().then(function(details) {
+              // Show a success message to your buyer
+              alert('Transaction completed by ' + details.payer.name.given_name);
+            });
+          }
+        }).render('#orderForm');
+      </script>
 
     </form>
 

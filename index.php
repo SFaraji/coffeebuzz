@@ -15,7 +15,7 @@ styleCLink();
  * when logged in as admin, redirect to admin page
  * when logged in as staff, redirect to staff page
  * when logged in as customer, provide real ordering function
- * when order is clicked, send order info and customer info to server and redirect to paypal gateway
+ * when order is clicked, send order info and customer info to server and redirect to paypal gateway.
  * 
  */
 ?>

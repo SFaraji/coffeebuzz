@@ -1,6 +1,30 @@
 <?php session_start();
+
 include_once('tools.php');
 styleCLink();
+require_once 'tools.php';
+echo '<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Menu</title>';
+escript();
+
+
+
+
+echo '
+</head>
+';
+
+$echoer = new echoer();
+$echoer->HeaderValue();
+
+
+
+productList();
 
 /**
  * Home page, 
@@ -18,13 +42,18 @@ styleCLink();
  * when order is clicked, send order info and customer info to server and redirect to paypal gateway
  * 
  */
+
+$echoer->FooterValue();
+echo '</html>';
 ?>
+<details open>
+    <summary>=Debug Show/Hide</summary>
+    <pre>
+      $_SESSION contains:
+                <?php print_r($_SESSION); ?>
 
+                $_POST contains:
+                <?php var_dump($_POST); ?>
+    </pre>
+</details>
 
-<!doctype HTML>
-
-<html>
-
-
-
-</html>

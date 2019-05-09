@@ -39,7 +39,7 @@ styleCLink();
             <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"><a class="btn btn-light action-button" href="login.html">Login</a></span></div>
     </div>
 </nav>
-    <h1 id="home-page-heading">Login To coffeeBuzz Portal</h1>
+    <h1 id="home-page-heading">Access to Portal</h1>
     <div class="login-clean">
         <form method="post">
             <h2 class="sr-only">Login Form</h2>

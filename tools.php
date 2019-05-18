@@ -115,44 +115,114 @@ class html_element
 function productList()
 {
     /*
-    <div class="col-md-3">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Espresso</h4>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="espresso">
-                    <label class="form-check-label">Small</label>
-                    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Espresso</h4>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="espresso">
+                            <label class="form-check-label">Small</label>
+                            <br/>
 
-                    <input class="form-check-input" type="radio" name="espresso">
-                    <label class="form-check-label">Medium</label>
-                    <br/>
+                            <input class="form-check-input" type="radio" name="espresso">
+                            <label class="form-check-label">Medium</label>
+                            <br/>
 
-                    <input class="form-check-input" type="radio" name="espresso">
-                    <label class="form-check-label">Large</label>
-                    <br/>
+                            <input class="form-check-input" type="radio" name="espresso">
+                            <label class="form-check-label">Large</label>
+                            <br/>
+                        </div>
+
+                        <input type="number" name="points" step="3">
+
+                        <label id="qty"></label>
+                        <a class="card-link" href="#">+</a><a class="card-link" href="#">-</a>
+                    </div>
                 </div>
-
-                <label id="qty"></label>
-                <a class="card-link" href="#">+</a><a class="card-link" href="#">-</a>
             </div>
         </div>
-    </div>
+    </div
     */
+    $sizes = ['Small','Medium' ,'Large', 'Extra Large'];
+
+    $itemName = 'ESPRESSO';
+    $numSizes = 3;
+
     $outerDiv = new html_element('div');
     $outerDiv->set('class','col-md-3');
+    $outerDiv->set('text','');
 
     $cardDiv = new html_element('div');
     $cardDiv->set('class', 'card');
+    $cardDiv->set('text','');
+
 
     $cardBodyDiv = new html_element('div');
     $cardBodyDiv->set('class', 'card-body');
+    $cardBodyDiv->set('text','');
 
     $title = new html_element('h4');
     $title->set('class', 'card-title');
     $title->set('text','TITLE GOES HERE');
 
-    //$outerDiv->output();
+    $radioButtons = new html_element('div');
+    $radioButtons->set('class','form-check');
+    $radioButtons->set('text','');
+
+    $buttons = array();
+    $labels = array();
+
+    for($index = 0; $index < $numSizes; $index++) {
+        $buttons[$index] = new html_element('input');
+        $buttons[$index]->set('class','form-check-input');
+        $buttons[$index]->set('type','radio');
+        $buttons[$index]->set('value','SIZE');
+        $buttons[$index]->set('name', $itemName.'_Buttons');
+        $buttons[$index]->set('text',''); 
+
+        $labels[$index] = new html_element('label');
+        $labels[$index]->set('class','form-check-label');
+        $labels[$index]->set('text', $sizes[$index]);
+    }
+    
+    $br = new html_element('br');
+    $br->set('text','');
+
+    for($index = 0; $index < $numSizes; $index++) {
+        $radioButtons->inject($buttons[$index]);
+        $radioButtons->inject($labels[$index]);
+        $radioButtons->inject($br);
+    }
+
+    $numItems = new html_element('input');
+    $radioButtons->set('type','number');
+    $radioButtons->set('name','points');
+    $radioButtons->set('text','');
+
+    
+    $cardBodyDiv->inject($title);
+    $cardBodyDiv->inject($radioButtons);
+    
+    $cardDiv->inject($cardBodyDiv);
+
+    $outerDiv->inject($cardDiv);
+
+    $container = new html_element('div');
+    $container->set('class','container');
+    $container->set('text','');
+
+    $row = new html_element('div');
+    $row->set('class', 'row');
+    $row->set('text','');
+
+    $row->inject($outerDiv);
+    $container->inject($row);
+
+    $container->output();
+
+
 
     $file = fopen("dishes.csv", "r");
     while ($data = fgetcsv($file)) {

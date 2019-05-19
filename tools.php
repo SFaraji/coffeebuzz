@@ -355,6 +355,11 @@ function escript()
         let e = 0;
         let qty = 0;
         let size = 0;
+        let receipt = "";
+        let details = "";
+        document.getElementById("orderDetails").innerText = "";
+        let sizes = ["Small","Medium + $0.50" ,"Large + $1.00", "Extra Large + $2.00"];
+
         ';
 
     //print_r($goods_list);
@@ -376,33 +381,34 @@ function escript()
             //console.log("QTY = "+qty);
             //console.log("ITEM PRICE = " + parseFloat(' . $arr[1] . '));
             //console.log("SIZE = "+(size));
+            
+            price += (parseFloat(' . $arr[1] . ') + parseInt(size)/2.00) * qty;
+            
+            if(qty > 0) {
+                receipt +=  "Item: '.$arr[0].' | ";
+                receipt += "Price: "+parseFloat('.$arr[1].')+" | ";
+                receipt += "Size: "+sizes[parseInt(size)]+" | ";
+                receipt += "Qty: "+qty+"\n";
 
-            price += (parseFloat(' . $arr[1] . ') + parseInt(size)/2.00) * qty;';
+                details += "'.$arr[0].','.$arr[1].',"+size+","+qty+"\n";
+            }
+
+            ';
         }
     }
     echo 'document.getElementById("orderPrice").innerText = price;
     //console.log(price);
     if (price > 0) {
         document.getElementById("orderForm").classList.remove("hiddenMessage");
+        document.getElementById("receipt").innerText = receipt; 
+        document.getElementById("orderDetails").innerText = details; 
     }else{
         document.getElementById("orderForm").classList.add("hiddenMessage");
+        
+        document.getElementById("receipt").innerText = "";
 
     }}
 
-    function enableSelection(productName) {
-        let qty = document.getElementById(productName + "qty");
-        let size = document.getElementById(productName + "size");
-        let product = document.getElementById(productName);
-
-        if (product.checked) {
-            qty.removeAttribute("disabled");
-            size.removeAttribute("disabled");
-        } else {
-            qty.setAttribute("disabled","1");
-            size.setAttribute("disabled","1");
-        }
-
-    }
     </script>
     ';
 }

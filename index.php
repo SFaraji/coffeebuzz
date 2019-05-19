@@ -153,6 +153,23 @@
         <div class="row">
           <h4>$<span id="orderPrice">0.00</span></h4>
         </div>
+        <span id="orderDetails" class="hiddenMessage"></span>
+        <button class="hiddenMessage" onclick='
+              let orderDetails = document.getElementById("orderDetails").innerText;
+              var xhr = new XMLHttpRequest();
+              xhr.open("POST", "/coffeebuzz/order.php", true);
+              xhr.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                  document.getElementById("response").innerHTML = this.responseText;
+                }
+              };
+              //xhr.setRequestHeader("Content-Type", "application/json");
+              xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+              xhr.send("name=" + "Steven" + "&details=" + "Coffee,5,0,5");
+
+              console.log("SENT REQUEST");
+        '>ORDER
+        </button>
       </div>
     </div>
 
@@ -188,6 +205,7 @@
             createOrder: function(data, actions) {
               // Set up the transaction
               let price = document.getElementById("orderPrice").innerText;
+
               return actions.order.create({
                 purchase_units: [{
                   amount: {
@@ -201,6 +219,15 @@
               return actions.order.capture().then(function(details) {
                 // Show a success message to your buyer
                 alert('Transaction completed by ' + details.payer.name.given_name);
+
+                let orderDetails = document.getElementById("orderDetails").innerText;
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "order.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send("name=" + details.payer.name.given_name + "&details=" + orderDetails);
+
+                console.log("SENT REQUEST");
               });
             }
           }).render('#orderForm');
@@ -208,7 +235,13 @@
       </div>
     </div>
 
-    
+    <br/>
+    <div id="receipt" class="hiddenMessage">
+    </div>
+
+    <br/>
+    <div id="response" class="">
+    </div>
 
   </body>
 

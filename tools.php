@@ -112,6 +112,93 @@ class html_element
 	}
 }
 
+function createItem($item) {
+    // name, price, instock, sizes
+    $itemName = $item[0];
+    $itemPrice = $item[1];
+    $itemInStock = $item[2];
+    $numSizes = $item[3];
+
+    $sizes = ['Small','Medium + $0.50' ,'Large + $1.00', 'Extra Large + $2.00'];
+
+    //$itemName = 'ESPRESSO';
+    //$numSizes = 3;
+
+    $outerDiv = new html_element('div');
+    $outerDiv->set('class','col-md-3');
+    $outerDiv->set('text','');
+
+    $cardDiv = new html_element('div');
+    $cardDiv->set('class', 'card');
+    $cardDiv->set('text','');
+
+
+    $cardBodyDiv = new html_element('div');
+    $cardBodyDiv->set('class', 'card-body');
+    $cardBodyDiv->set('text','');
+
+    $title = new html_element('h4');
+    $title->set('class', 'card-title');
+    $title->set('text',$itemName);
+
+    $price = new html_element('p');
+    $price->set('text',"$".$itemPrice);
+
+    $radioButtons = new html_element('div');
+    $radioButtons->set('class','form-check');
+    $radioButtons->set('text','');
+
+    $buttons = array();
+    $labels = array();
+
+    for($index = 0; $index < $numSizes; $index++) {
+        $buttons[$index] = new html_element('input');
+        $buttons[$index]->set('class','form-check-input');
+        $buttons[$index]->set('type','radio');
+        $buttons[$index]->set('value',$sizes[$index]);
+        $buttons[$index]->set('name', $itemName.'_size');
+        $buttons[$index]->set('text',''); 
+
+        $labels[$index] = new html_element('label');
+        $labels[$index]->set('class','form-check-label');
+        $labels[$index]->set('text', $sizes[$index]);
+    }
+    
+    $br = new html_element('br');
+    $br->set('text','');
+
+    for($index = 0; $index < $numSizes; $index++) {
+        $radioButtons->inject($buttons[$index]);
+        $radioButtons->inject($labels[$index]);
+        $radioButtons->inject($br);
+    }
+
+    $numItems = new html_element('input');
+    $numItems->set('type','number');
+    $numItems->set('name','points');
+    $numItems->set('style','width: 30%;');
+    $numItems->set('min','0');
+    $numItems->set('text','');
+
+    $numItemsLabel = new html_element('p');
+    $numItemsLabel->set('class','form-check-label');
+    $numItemsLabel->set('text', 'Quantity');
+
+
+    
+    $cardBodyDiv->inject($title);
+    $cardBodyDiv->inject($price);
+    $cardBodyDiv->inject($radioButtons);
+    $cardBodyDiv->inject($numItemsLabel);
+    $cardBodyDiv->inject($numItems);
+    
+    $cardDiv->inject($cardBodyDiv);
+
+    $outerDiv->inject($cardDiv);
+
+    return $outerDiv;
+}
+
 function productList()
 {
     /*
@@ -135,79 +222,27 @@ function productList()
                             <br/>
                         </div>
 
-                        <input type="number" name="points" step="3">
+                        <input type="number" name="points" step="1">
 
                         <label id="qty"></label>
-                        <a class="card-link" href="#">+</a><a class="card-link" href="#">-</a>
                     </div>
                 </div>
             </div>
         </div>
     </div
     */
-    $sizes = ['Small','Medium' ,'Large', 'Extra Large'];
-
-    $itemName = 'ESPRESSO';
-    $numSizes = 3;
-
-    $outerDiv = new html_element('div');
-    $outerDiv->set('class','col-md-3');
-    $outerDiv->set('text','');
-
-    $cardDiv = new html_element('div');
-    $cardDiv->set('class', 'card');
-    $cardDiv->set('text','');
-
-
-    $cardBodyDiv = new html_element('div');
-    $cardBodyDiv->set('class', 'card-body');
-    $cardBodyDiv->set('text','');
-
-    $title = new html_element('h4');
-    $title->set('class', 'card-title');
-    $title->set('text','TITLE GOES HERE');
-
-    $radioButtons = new html_element('div');
-    $radioButtons->set('class','form-check');
-    $radioButtons->set('text','');
-
-    $buttons = array();
-    $labels = array();
-
-    for($index = 0; $index < $numSizes; $index++) {
-        $buttons[$index] = new html_element('input');
-        $buttons[$index]->set('class','form-check-input');
-        $buttons[$index]->set('type','radio');
-        $buttons[$index]->set('value','SIZE');
-        $buttons[$index]->set('name', $itemName.'_Buttons');
-        $buttons[$index]->set('text',''); 
-
-        $labels[$index] = new html_element('label');
-        $labels[$index]->set('class','form-check-label');
-        $labels[$index]->set('text', $sizes[$index]);
-    }
     
-    $br = new html_element('br');
-    $br->set('text','');
 
-    for($index = 0; $index < $numSizes; $index++) {
-        $radioButtons->inject($buttons[$index]);
-        $radioButtons->inject($labels[$index]);
-        $radioButtons->inject($br);
+    $file = fopen("dishes.csv", "r");
+    while ($data = fgetcsv($file)) {
+        $goods_list[] = $data;
     }
 
-    $numItems = new html_element('input');
-    $radioButtons->set('type','number');
-    $radioButtons->set('name','points');
-    $radioButtons->set('text','');
+    fclose($file);
 
     
-    $cardBodyDiv->inject($title);
-    $cardBodyDiv->inject($radioButtons);
-    
-    $cardDiv->inject($cardBodyDiv);
-
-    $outerDiv->inject($cardDiv);
+    // echo '<form action="index.php" method="post">
+    // ';
 
     $container = new html_element('div');
     $container->set('class','container');
@@ -217,70 +252,32 @@ function productList()
     $row->set('class', 'row');
     $row->set('text','');
 
-    $row->inject($outerDiv);
-    $container->inject($row);
-
-    $container->output();
-
-
-
-    $file = fopen("dishes.csv", "r");
-    while ($data = fgetcsv($file)) {
-        $goods_list[] = $data;
-    }
-    fclose($file);
-
-    echo '<form action="index.php" method="post">
-    ';
-
-
+    $br = new html_element('br');
+    $br->set('text','');
+    $index = 0;
     foreach ($goods_list as $arr) {
         // name, price, instock, sizes
+        
+        $outerDiv = createItem($arr);
 
-        echo '
-        <input type="checkbox" name="' . $arr[0] . '"';
-        if ($arr[2] == 0) {
-            echo 'disabled';
-        }
-        echo ' id="' . $arr[0] . '" value="1" onchange="calcPrice(); enableSelection(\''.$arr[0].'\')">' . $arr[0] . ' $' . $arr[1] . '
-        quantity: <select disabled name="' . $arr[0] . 'qty" id="' . $arr[0] . 'qty" onchange="calcPrice()">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-        </select>';
+        $row->inject($outerDiv);
+        
+        if($index == 3) {
+            $container->inject($row);
+            $container->inject($br);
 
-
-        if ($arr[3] > 1) {
-            echo 'size: <select disabled name="' . $arr[0] . 'size" id="' . $arr[0] . 'size" onchange="calcPrice()">
-            <option value="0">large</option>
-                    <option value="1">larger</option>';
-            if ($arr[3] > 2) {
-                echo '<option value="2">largest</option>';
-            }
-        } else {
-            echo 'Single size';
+            $row = new html_element('div');
+            $row->set('class', 'row');
+            $row->set('text','');
         }
-        echo '
-        </select>
-        ';
-        if ($arr[2] == 0) {
-            echo 'Sold Out!';
-        }
-        echo '
-    <br>
-    ';
+        $index++;
+        $index = $index % 4;
     }
-    echo '<p>Total :$<span id="total"></span></p>
-    Customer Name: <input type="text" name="customer name" id="customer name" onchange="calcPrice()"><br>
-    Paypal Email: <input type="email" name="Paypal" id="Paypal" onchange="calcPrice()"><br>
-    <input disabled id="submit" type="submit" value="order">
-    </form>';
+
+    $container->inject($row);
+    $container->inject($br);
+
+    $container->output();
 }
 
 function escript()

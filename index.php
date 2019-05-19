@@ -5,22 +5,8 @@
   styleCLink();
   require_once 'tools.php';
 
-  escript();
-
-
-
-
-  echo '
-  </head>
-  ';
-
   $echoer = new echoer();
   $echoer->HeaderValue();
-
-
-
-  productList();
-
 
   /**
    * Home page, 
@@ -100,6 +86,14 @@
     </div>
 
     <div>
+
+      <?php
+        productList();
+        escript();
+      ?>
+
+      <br/>
+      <!--
       <div class="container">
         <div class="row">
 
@@ -147,6 +141,9 @@
           </div>
           
         </div>
+
+    -->
+
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 

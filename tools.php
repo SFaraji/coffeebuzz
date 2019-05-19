@@ -155,9 +155,14 @@ function createItem($item) {
         $buttons[$index] = new html_element('input');
         $buttons[$index]->set('class','form-check-input');
         $buttons[$index]->set('type','radio');
-        $buttons[$index]->set('value',$sizes[$index]);
+        $buttons[$index]->set('value',$index);
         $buttons[$index]->set('name', $itemName.'_size');
-        $buttons[$index]->set('text',''); 
+        $buttons[$index]->set('text','');
+        $buttons[$index]->set('onChange','calcPrice()');
+
+        if($index == 0) {
+            $buttons[$index]->set('checked','True');
+        }
 
         $labels[$index] = new html_element('label');
         $labels[$index]->set('class','form-check-label');
@@ -175,9 +180,12 @@ function createItem($item) {
 
     $numItems = new html_element('input');
     $numItems->set('type','number');
+    $numItems->set('id',$itemName.'_qty');
     $numItems->set('name','points');
     $numItems->set('style','width: 30%;');
     $numItems->set('min','0');
+    $numItems->set('value','0');
+    $numItems->set('onChange','calcPrice()');
     $numItems->set('text','');
 
     $numItemsLabel = new html_element('p');
@@ -188,9 +196,19 @@ function createItem($item) {
     
     $cardBodyDiv->inject($title);
     $cardBodyDiv->inject($price);
-    $cardBodyDiv->inject($radioButtons);
-    $cardBodyDiv->inject($numItemsLabel);
-    $cardBodyDiv->inject($numItems);
+
+    if($itemInStock == '1'){
+        $cardBodyDiv->inject($radioButtons);
+        $cardBodyDiv->inject($numItemsLabel);
+        $cardBodyDiv->inject($numItems);
+    }
+    else {
+        $outOfStock = new html_element('p');
+        $outOfStock->set('class','form-check-label');
+        $outOfStock->set('text', 'Out of Stock');
+        $cardBodyDiv->inject($outOfStock);
+    }
+    
     
     $cardDiv->inject($cardBodyDiv);
 
@@ -280,7 +298,74 @@ function productList()
     $container->output();
 }
 
+
 function escript()
+{
+    $file = fopen("dishes.csv", "r");
+    while ($data = fgetcsv($file)) {
+        $goods_list[] = $data;
+    }
+    fclose($file);
+    echo '<script type="text/javascript">
+        function calcPrice() {
+        let price = 0;
+        let e = 0;
+        let qty = 0;
+        let size = 0;
+        ';
+
+    //print_r($goods_list);
+
+    foreach ($goods_list as $arr) {
+
+        if ($arr[2] == 1) {
+            echo 'e = document.getElementById("' . $arr[0] . '_qty");
+            qty = e.value;
+            //console.log(qty);
+            ';
+            if ($arr[3] > 1) {
+                echo 'size = document.querySelector("input[name=\''.$arr[0].'_size\']:checked").value;';
+            } else {
+                echo 'size = 0;';
+            }
+
+            echo '
+            //console.log("QTY = "+qty);
+            //console.log("ITEM PRICE = " + parseInt(' . $arr[1] . '));
+            //console.log("SIZE = "+(size));
+
+            price += (parseInt(' . $arr[1] . ') + parseInt(size)/2.00) * qty;';
+        }
+    }
+    echo 'document.getElementById("orderPrice").innerText = price;
+    //console.log(price);
+    if (price > 0) {
+        document.getElementById("orderForm").classList.remove("hiddenMessage");
+    }else{
+        document.getElementById("orderForm").classList.add("hiddenMessage");
+
+    }}
+
+    function enableSelection(productName) {
+        let qty = document.getElementById(productName + "qty");
+        let size = document.getElementById(productName + "size");
+        let product = document.getElementById(productName);
+
+        if (product.checked) {
+            qty.removeAttribute("disabled");
+            size.removeAttribute("disabled");
+        } else {
+            qty.setAttribute("disabled","1");
+            size.setAttribute("disabled","1");
+        }
+
+    }
+    </script>
+    ';
+}
+
+
+function escript2()
 {
     $file = fopen("dishes.csv", "r");
     while ($data = fgetcsv($file)) {

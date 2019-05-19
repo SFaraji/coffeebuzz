@@ -71,7 +71,7 @@
       <div class="collapse navbar-collapse" id="navcol-1">
         <ul class="nav navbar-nav mr-auto"></ul>
         <span class="navbar-text actions">
-        <a class="btn btn-light action-button" href="login.php">Login</a></span></div>
+        <a class="btn btn-light action-button" href="login.php" style="border-radius: 5px">Login</a></span></div>
       </div>
     </nav></div>
     
@@ -144,6 +144,18 @@
 
     -->
 
+    <div>
+      <div class="container">
+        <div class="row">
+          <div><h4>Price:</h4></div>
+          <br/>
+        </div>
+        <div class="row">
+          <h4>$<span id="orderPrice">0.00</span></h4>
+        </div>
+      </div>
+    </div>
+
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
@@ -151,7 +163,7 @@
     <hr/>
 
     <div class="text-center">
-      <form class="form-signin" id='orderForm'>
+      <form class="form-signin hiddenMessage" id='orderForm'>
         
         <h1 class="h3 mb-3 font-weight-normal">Payment</h1>
         <!--
@@ -175,10 +187,11 @@
           paypal.Buttons({
             createOrder: function(data, actions) {
               // Set up the transaction
+              let price = document.getElementById("orderPrice").innerText;
               return actions.order.create({
                 purchase_units: [{
                   amount: {
-                    value: '0.01'
+                    value: price
                   }
                 }]
               });

@@ -252,7 +252,7 @@
       echo '</html>';
     ?>
 
-<details open>
+<details open class="hiddenMessage">
   <summary>=Debug Show/Hide</summary>
   <pre>
     $_SESSION contains:

@@ -93,56 +93,6 @@
       ?>
 
       <br/>
-      <!--
-      <div class="container">
-        <div class="row">
-
-          <div class="col-md-3">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Espresso</h4>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="espresso">
-                  <label class="form-check-label">Small</label>
-                  <br/>
-
-                  <input class="form-check-input" type="radio" name="espresso">
-                  <label class="form-check-label">Medium</label>
-                  <br/>
-
-                  <input class="form-check-input" type="radio" name="espresso">
-                  <label class="form-check-label">Large</label>
-                  <br/>
-                </div>
-
-                <label id="qty"></label>
-                <a class="card-link" href="#">+</a><a class="card-link" href="#">-</a>
-                </div>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-
-        <div></div>
-        <div></div>
-
-          <div>
-            <div class="container">
-              <div class="row">
-                <div class="col-md-4"><div class="dropdown"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button" id="sides-dropdown">Select Sides </button>
-                <div role="menu" class="dropdown-menu">
-                  <a role="presentation" href="#" class="dropdown-item">Blueberry Cake</a>
-                  <a role="presentation" href="#" class="dropdown-item">Banana Bread</a>
-                  <a role="presentation" href="#" class="dropdown-item">Ham and Cheese Toastie</a>
-                </div>
-              </div><button class="btn btn-primary" type="button" id="order-btn">ORDER NOW</button></div>
-            </div>
-          </div>
-          
-        </div>
-
-    -->
 
     <div>
       <div class="container">
@@ -154,22 +104,6 @@
           <h4>$<span id="orderPrice">0.00</span></h4>
         </div>
         <span id="orderDetails" class="hiddenMessage"></span>
-        <button class="hiddenMessage" onclick='
-              let orderDetails = document.getElementById("orderDetails").innerText;
-              var xhr = new XMLHttpRequest();
-              xhr.open("POST", "/coffeebuzz/order.php", true);
-              xhr.onreadystatechange = function() {
-              if (this.readyState == 4 && this.status == 200) {
-                  document.getElementById("response").innerHTML = this.responseText;
-                }
-              };
-              //xhr.setRequestHeader("Content-Type", "application/json");
-              xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-              xhr.send("name=" + "Steven" + "&details=" + "Coffee,5,0,5");
-
-              console.log("SENT REQUEST");
-        '>ORDER
-        </button>
       </div>
     </div>
 
@@ -183,15 +117,6 @@
       <div class="form-signin hiddenMessage" id='orderForm'>
         
         <h1 class="h3 mb-3 font-weight-normal">Payment</h1>
-        <!--
-        <label for="name" class="sr-only">Name</label>
-        <input type="text" id="name" class="form-control" placeholder="Full Name" required>
-        <br/>
-
-        <label for="email" class="sr-only">Email</label>
-        <input type="email" id="email" class="form-control" placeholder="Email Address" required>
-        <br/>
-        -->
 
         <!-- TEST PAYPAL ACCOUNT DETAILS:
           email: leeroy@gmail.com
@@ -226,8 +151,6 @@
                 xhr.open("POST", "order.php", true);
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xhr.send("name=" + details.payer.name.given_name + "&details=" + orderDetails);
-
-                console.log("SENT REQUEST");
 
                 document.getElementById("receipt").classList.remove("hiddenMessage");
               });

@@ -262,49 +262,7 @@ function getMenu() {
 
 function productList()
 {
-    /*
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Espresso</h4>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="espresso">
-                            <label class="form-check-label">Small</label>
-                            <br/>
 
-                            <input class="form-check-input" type="radio" name="espresso">
-                            <label class="form-check-label">Medium</label>
-                            <br/>
-
-                            <input class="form-check-input" type="radio" name="espresso">
-                            <label class="form-check-label">Large</label>
-                            <br/>
-                        </div>
-
-                        <input type="number" name="points" step="1">
-
-                        <label id="qty"></label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div
-    */
-    
-
-    /*
-    $file = fopen("dishes.csv", "r");
-    while ($data = fgetcsv($file)) {
-        $goods_list[] = $data;
-    }
-
-    fclose($file);
-    */
-    
-    // echo '<form action="index.php" method="post">
-    // ';
 
     $goods_list = getMenu();
 
@@ -416,69 +374,8 @@ function escript()
 }
 
 
-function escript2()
-{
-    $file = fopen("dishes.csv", "r");
-    while ($data = fgetcsv($file)) {
-        $goods_list[] = $data;
-    }
-    fclose($file);
-    echo '<script type="text/javascript">
-    function calcPrice() {
-    let price = 0;
-    ';
-    //print_r($goods_list);
-    foreach ($goods_list as $arr) {
-
-        if ($arr[2] == 1) {
-            echo 'if (document.getElementById("' . $arr[0] . '").checked) {
-            let e = document.getElementById("' . $arr[0] . 'qty");
-            let qty = e.options[e.selectedIndex].value;
-            
-            ';
-            if ($arr[3] > 1) {
-                echo 'e = document.getElementById("' . $arr[0] . 'size");
-                let size = e.options[e.selectedIndex].value;';
-            } else {
-                echo 'let size = 0;';
-            }
-
-            echo '
-            price += (parseInt(' . $arr[1] . ') + parseInt(size)) * qty;
-        }
-        ';
-        }
-    }
-    echo 'document.getElementById("total").innerText = price;
-    if (price>0 && document.getElementById("customer name").value != "" && document.getElementById("Paypal").value != "") {
-        document.getElementById("submit").removeAttribute("disabled");
-    }else{
-        document.getElementById("submit").setAttribute("disabled", "1");
-
-    }}
-
-    function enableSelection(productName) {
-        let qty = document.getElementById(productName + "qty");
-        let size = document.getElementById(productName + "size");
-        let product = document.getElementById(productName);
-
-        if (product.checked) {
-            qty.removeAttribute("disabled");
-            size.removeAttribute("disabled");
-        } else {
-            qty.setAttribute("disabled","1");
-            size.setAttribute("disabled","1");
-        }
-
-    }
-    </script>
-    ';
-}
-
 class echoer
 {
-
-
     function HeaderValue()
     {
         echo '
@@ -498,7 +395,6 @@ class echoer
       </head>
         ';
     }
-
 
     /**
      * echo the footer which is the copyright info and the links

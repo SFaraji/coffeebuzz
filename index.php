@@ -163,7 +163,7 @@
     <hr/>
 
     <div class="text-center">
-      <form class="form-signin hiddenMessage" id='orderForm'>
+      <div class="form-signin hiddenMessage" id='orderForm'>
         
         <h1 class="h3 mb-3 font-weight-normal">Payment</h1>
         <!--
@@ -205,7 +205,7 @@
             }
           }).render('#orderForm');
         </script>
-      </form>
+      </div>
     </div>
 
     

@@ -15,6 +15,22 @@ function test_input($data)
     return $data;
 }
 
+function OpenCon()
+ {
+    $dbhost = "localhost";
+    $dbuser = "root";
+    $dbpass = "admin";
+    $db = "coffeebuzz";
+    $conn = new mysqli($dbhost, $dbuser, $dbpass,$db) or die("Connect failed: %s\n". $conn -> error);
+    
+    return $conn;
+ }
+ 
+function CloseCon($conn)
+ {
+ $conn -> close();
+ }
+
 // REFERENCE: 
 // https://davidwalsh.name/create-html-elements-php-htmlelement-class
 
@@ -217,6 +233,33 @@ function createItem($item) {
     return $outerDiv;
 }
 
+function getMenu() {
+
+    $servername = "localhost";
+    $username = "root";
+    $password = "admin";
+    $db = "coffeebuzz";
+    // Create connection
+    $conn = mysqli_connect($servername, $username, $password,$db);
+    
+    $sql = "SELECT * FROM menu";
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            // echo "item_id: ".$row["item_id"]." - Name: ".$row["name"]." - Price ".$row["price"]." - In Stock ". $row["in_stock"]." - Sizes ".$row["sizes"]."<br>";
+            $goods_list[] = [$row["name"], $row["price"], $row["in_stock"], $row["sizes"]];
+        }
+    } 
+    else {
+        echo "0 results";
+    }
+
+    $conn->close();
+    return $goods_list;
+}
+
 function productList()
 {
     /*
@@ -251,16 +294,19 @@ function productList()
     */
     
 
+    /*
     $file = fopen("dishes.csv", "r");
     while ($data = fgetcsv($file)) {
         $goods_list[] = $data;
     }
 
     fclose($file);
-
+    */
     
     // echo '<form action="index.php" method="post">
     // ';
+
+    $goods_list = getMenu();
 
     $container = new html_element('div');
     $container->set('class','container');
@@ -273,6 +319,7 @@ function productList()
     $br = new html_element('br');
     $br->set('text','');
     $index = 0;
+
     foreach ($goods_list as $arr) {
         // name, price, instock, sizes
         
@@ -301,11 +348,7 @@ function productList()
 
 function escript()
 {
-    $file = fopen("dishes.csv", "r");
-    while ($data = fgetcsv($file)) {
-        $goods_list[] = $data;
-    }
-    fclose($file);
+    $goods_list = getMenu();
     echo '<script type="text/javascript">
         function calcPrice() {
         let price = 0;
@@ -331,10 +374,10 @@ function escript()
 
             echo '
             //console.log("QTY = "+qty);
-            //console.log("ITEM PRICE = " + parseInt(' . $arr[1] . '));
+            //console.log("ITEM PRICE = " + parseFloat(' . $arr[1] . '));
             //console.log("SIZE = "+(size));
 
-            price += (parseInt(' . $arr[1] . ') + parseInt(size)/2.00) * qty;';
+            price += (parseFloat(' . $arr[1] . ') + parseInt(size)/2.00) * qty;';
         }
     }
     echo 'document.getElementById("orderPrice").innerText = price;
@@ -373,7 +416,7 @@ function escript2()
     }
     fclose($file);
     echo '<script type="text/javascript">
-function calcPrice() {
+    function calcPrice() {
     let price = 0;
     ';
     //print_r($goods_list);

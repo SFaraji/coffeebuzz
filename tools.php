@@ -355,7 +355,7 @@ function escript()
         let e = 0;
         let qty = 0;
         let size = 0;
-        let receipt = "";
+        let receipt = "ORDER CONFIRMED\n---------------------------------------------------------------\n";
         let details = "";
         document.getElementById("orderDetails").innerText = "";
         let sizes = ["Small","Medium + $0.50" ,"Large + $1.00", "Extra Large + $2.00"];
@@ -400,6 +400,8 @@ function escript()
     //console.log(price);
     if (price > 0) {
         document.getElementById("orderForm").classList.remove("hiddenMessage");
+
+        receipt += "TOTAL: $"+price+"\n---------------------------------------------------------------\n";
         document.getElementById("receipt").innerText = receipt; 
         document.getElementById("orderDetails").innerText = details; 
     }else{

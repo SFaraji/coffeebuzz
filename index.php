@@ -199,7 +199,7 @@
 
           reference: https://developer.paypal.com/docs/checkout/integrate/#5-capture-the-transaction
         -->
-        <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=AUD"></script>
         <script>
           paypal.Buttons({
             createOrder: function(data, actions) {
@@ -228,6 +228,8 @@
                 xhr.send("name=" + details.payer.name.given_name + "&details=" + orderDetails);
 
                 console.log("SENT REQUEST");
+
+                document.getElementById("receipt").classList.remove("hiddenMessage");
               });
             }
           }).render('#orderForm');

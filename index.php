@@ -70,7 +70,7 @@
       <div class="collapse navbar-collapse" id="navcol-1">
         <ul class="nav navbar-nav mr-auto"></ul>
         <span class="navbar-text actions">
-        <a class="btn btn-light action-button" href="login.php" style="border-radius: 5px">Login</a></span></div>
+        <a class="btn btn-light action-button" href="login.php" style="border-radius: 5px">Staff Login</a></span></div>
       </div>
     </nav>
     </div>

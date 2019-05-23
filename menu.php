@@ -66,54 +66,57 @@ styleCLink();
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <?php
+                include_once('tools.php');
+
+                $conn = OpenCon();
+                $sql = "SELECT name, price, sizes FROM menu";
+                $result = $conn->query($sql);
+                $i = 0; //order number
+
+                while($row = $result->fetch_assoc()){
+                    echo'<div class="col-md-3">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Espresso</h4>
-                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Small</label></div><label id="qty"></label><a class="card-link" href="#">Mark as Sold Out</a>
-                            <h4
-                                class="card-title">Double espresso</h4>
-                                <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Small</label></div><label id="qty"></label><a class="card-link" href="#">Mark as Sold Out</a></div>
-                                
+                            <h4 class="card-title">'.$row["name"].'</h4>
+                            <label class="form-check-label" for="formCheck-1">Price: </label>
+                            <div class="form-check"><input class="form-check-input" style="position: relative;" type="text" value='.$row["price"].'></div>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"';
+                    
+                    if($row["sizes"] >= 1) {
+                        echo 'checked';
+                    }
+                    
+                    echo '><label class="form-check-label" for="formCheck-1">Small</label></div>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"';
+                    
+                    if($row["sizes"] >= 2) {
+                        echo 'checked';
+                    }
+
+                    echo '><label class="form-check-label" for="formCheck-2">Medium</label></div>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"';
+                        
+                    if($row["sizes"] >= 3) {
+                        echo 'checked';
+                    }
+
+                    echo '><label class="form-check-label" for="formCheck-2">Large</label></div>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"';
+
+                    if($row["sizes"] >= 4) {
+                        echo 'checked';
+                    }        
+                            
+                    echo '><label class="form-check-label" for="formCheck-2">Extra Large</label></div>
+                            <label id="markAsSoldOut"></label><a class="card-link" href="#">Mark as Sold Out</a></div> 
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Latte</h4>
-                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Large</label></div><label id="qty"></label><a class="card-link" href="#">Mark as Sold Out</a>
-                            <h4
-                                class="card-title">Cappuccino</h4>
-                                <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Medium</label></div>
-                                <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Large</label></div><label id="qty"></label><a class="card-link" href="#">Mark as Sold Out</a></div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Long black</h4>
-                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Medium</label></div>
-                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Large</label></div><label id="qty"></label><a class="card-link" href="#">Mark as Sold Out</a>
-                            <h4
-                                class="card-title">Hot chocolate</h4>
-                                <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Medium</label></div>
-                                <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Large</label></div><label id="qty"></label><a class="card-link" href="#">Mark as Sold Out</a></div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Tea</h4><select>
-    <option value="" disabled selected>Tea choices</option>
-    <option value="12">Early Grey</option>
-    <option value="13">Assam</option>
-    <option value="14">Green</option>        
-    <option value="15">Mint</option>
-</select>
-                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Medium</label></div>
-                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Large</label></div><label id="qty"></label><a class="card-link" href="#">Mark as Sold Out</a></div>
-                    </div>
-                </div>
+                </div>';
+                    $i++;
+                }
+
+                CloseCon($conn);
+                ?>
             </div>
         </div>
     </div>

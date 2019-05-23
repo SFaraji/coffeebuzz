@@ -46,7 +46,7 @@ styleCLink();
     <h1 id="home-page-heading">Access to Portal</h1>
     <div class="login-clean">
         <form method="post">
-            <h2 class="sr-only">Login Form</h2>
+            <h1>STAFF ACCESS</h1>
             <div class="illustration"></div>
             <div class="form-group"><input type="text" name="unique identifier" placeholder="Unique Identifier" class="form-control" /></div>
             <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div><a href="#" class="forgot">Forgot your email or password?</a></form>

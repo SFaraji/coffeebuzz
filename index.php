@@ -146,11 +146,12 @@
                 alert('Transaction completed by ' + details.payer.name.given_name);
 
                 let orderDetails = document.getElementById("orderDetails").innerText;
+                let price = document.getElementById("orderPrice").innerText
 
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", "order.php", true);
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.send("name=" + details.payer.name.given_name + "&details=" + orderDetails);
+                xhr.send("name=" + details.payer.name.given_name + "&details=" + orderDetails +'&price=' + price);
 
                 document.getElementById("receipt").classList.remove("hiddenMessage");
               });

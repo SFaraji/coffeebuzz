@@ -12,7 +12,7 @@ $db = "coffeebuzz";
 // Create connection
 $conn = mysqli_connect($servername, $username, $password,$db);
 
-$sql = "INSERT INTO `orders`(`name`, `details`) VALUES ('".$_POST['name']."','".$_POST['details']."')";
+$sql = "INSERT INTO `orders`(`name`, `details`, `price`) VALUES ('".$_POST['name']."','".$_POST['details']."','".$_POST['price']."')";
 //echo $sql."<br/>";
 $result = $conn->query($sql);
 

@@ -37,20 +37,14 @@ styleCLink();
 <div>
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
       <div class="container"><a href="index.php" class="navbar-brand">coffeeBuzz</a><button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navcol-1">
-        <ul class="nav navbar-nav mr-auto"></ul>
-        <span class="navbar-text actions">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Account
-            </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="menu.php">Staff Menu</a>
-                    <a class="dropdown-item" href="barista.php">Requests</a>
-                    <a class="dropdown-item" href="#" aria-disabled="true">Settings</a>
-                    <a class="dropdown-item" href="#" aria-disabled="true">Profile</a>
-                </div>
-        </div></span>
+      
+      <div class="collapse navbar-collapse"
+            id="navcol-1">
+            <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"><a class="btn btn-light action-button" href="index.php">Customer</a></span>
+            <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"><a class="btn btn-light action-button" href="orders.php">Orders</a></span>
+            <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"><a class="btn btn-light action-button" href="menu.php">Menu</a></span>
+            <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"><a class="btn btn-light action-button" href="login.php">Sign Out</a></span>
+            </div>
       </div>
     </nav>
 </div>

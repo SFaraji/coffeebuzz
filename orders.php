@@ -37,9 +37,11 @@ styleCLink();
     <div class="container"><a href="barista.php" class="navbar-brand">coffeeBuzz</a><button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse"
             id="navcol-1">
-            <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"><a class="btn btn-light action-button" href="barista.php">Requests</a></span></div>
-            <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"><a class="btn btn-light action-button" href="menu.php">Menu</a></span></div>
-            <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"><a class="btn btn-light action-button" href="login.php">Account</a></span></div>
+            <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"><a class="btn btn-light action-button" href="index.php">Customer</a></span>
+            <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"><a class="btn btn-light action-button" href="orders.php">Orders</a></span>
+            <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"><a class="btn btn-light action-button" href="menu.php">Menu</a></span>
+            <ul class="nav navbar-nav mr-auto"></ul><span class="navbar-text actions"><a class="btn btn-light action-button" href="login.php">Sign Out</a></span>
+            </div>
     </div>
 </nav>
 </div>
@@ -59,10 +61,9 @@ styleCLink();
 	
 	while($row = $result->fetch_assoc()){
 		echo'<div class="col-md-4">
-			<div><button class="btn btn-primary" type="button" id="order-btn1" onclick = "show('.$i.')">Order ID: '.$i.'</button></div>
-			<div class="container" id="'.$i.'" style="display: none;"> <p><b>Customer Name: </b> '.$row["name"].'</p><p><b>Details: </b> '.$row["details"].'</p><button class="btn btn-secondry" type="button">Order Complete</button></div>
-		</div>
-		<br>';
+			<div class="card"><div class="card"><button class="btn btn-primary" type="button" id="order-btn1" onclick = "show('.($i+1).')">Order ID: '.($i+1).'</button></div>
+			<div class="container" id="'.($i+1).'" style="display: none;"> <p><b>Customer Name: </b> '.$row["name"].'</p><p><b>Details: </b> '.$row["details"].'</p><button class="btn btn-secondry" type="button" style="margin-bottom: 15px;">Order Complete</button></div>
+		</div></div><br/>';
 		$i++;
 	}
 	

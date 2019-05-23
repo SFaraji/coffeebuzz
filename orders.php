@@ -52,7 +52,7 @@ styleCLink();
 
 <?php
 
-	OpenCon();
+	$conn = OpenCon();
 	$sql = "SELECT name, details FROM orders";
 	$result = $conn->query($sql);
 	$i = 0; //order number

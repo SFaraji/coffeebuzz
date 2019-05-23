@@ -122,19 +122,13 @@ styleCLink();
     <div>
         <div class="container">
             <div class="row">
+            <button class="btn btn-primary" type="button" id="order-btn">Cancel</button>
 
-            <div class="card-body col-md-4">
-                <h4 class="card-title">Select Sides</h4><select>
-                    <option value="" disabled selected>Food Choices</option>
-                    <option value="12">Blueberry Cake</option>
-                    <option value="13">Banana Bread</option>
-                    <option value="14">Ham and Cheese Toastie</option>        
-                    <a class="card-link" href="#">Mark as Sold Out</a>
-                </select>
+            <button class="btn btn-primary" type="button" id="order-btn" style="margin-left:5px;">Update Menu</button>
             </div>
-            
-</div><button class="btn btn-primary" type="button" id="order-btn">Cancel</button></div>
-</div><button class="btn btn-primary" type="button" id="order-btn">Update Menu</button></div>
+            </div>
+
+</div>
             </div>
         </div>
     </div>

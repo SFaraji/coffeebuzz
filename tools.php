@@ -348,7 +348,7 @@ function escript()
                 receipt += "Size: "+sizes[parseInt(size)]+" | ";
                 receipt += "Qty: "+qty+"\n";
 
-                details += "'.$arr[0].','.$arr[1].',"+size+","+qty+"|";
+                details += "'.$arr[0].','.$arr[1].',"+size+","+qty+" | ";
             }
 
             ';

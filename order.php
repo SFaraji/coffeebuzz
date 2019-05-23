@@ -1,6 +1,6 @@
 <?php
-print_r($_POST);
-echo "<br/>APPLE<br/>";
+//print_r($_POST);
+//echo "<br/>APPLE<br/>";
 
 //echo 'Hello ' . htmlspecialchars($_REQUEST["name"]) . '<br/>';
 //echo 'DETAILS: ' . htmlspecialchars($_REQUEST["details"]) . '<br/>';
@@ -13,7 +13,7 @@ $db = "coffeebuzz";
 $conn = mysqli_connect($servername, $username, $password,$db);
 
 $sql = "INSERT INTO `orders`(`name`, `details`) VALUES ('".$_POST['name']."','".$_POST['details']."')";
-echo $sql."<br/>";
+//echo $sql."<br/>";
 $result = $conn->query($sql);
 
 echo $result;

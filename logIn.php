@@ -39,7 +39,7 @@ styleCLink();
       <div class="collapse navbar-collapse" id="navcol-1">
         <ul class="nav navbar-nav mr-auto"></ul>
         <span class="navbar-text actions">
-        <a class="btn btn-light action-button" href="login.php" style="border-radius: 5px">Login</a></span></div>
+        <a class="btn btn-light action-button" href="orders.php" style="border-radius: 5px">Login</a></span></div>
       </div>
     </nav>
     </div>
@@ -49,7 +49,7 @@ styleCLink();
             <h1>STAFF ACCESS</h1>
             <div class="illustration"></div>
             <div class="form-group"><input type="text" name="unique identifier" placeholder="Unique Identifier" class="form-control" /></div>
-            <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div><a href="#" class="forgot">Forgot your email or password?</a></form>
+            <div class="form-group"><button class="btn btn-primary btn-block" onclick="window.location.href='orders.php'" >Log In</button></div><a href="orders.php" class="forgot">Forgot your email or password?</a></form>
     </div>
     <div class="footer-basic">
         <footer>

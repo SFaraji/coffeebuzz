@@ -46,7 +46,7 @@ styleCLink();
             </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="menu.php">Staff Menu</a>
-                    <a class="dropdown-item" href="#" aria-disabled="true">Requests</a>
+                    <a class="dropdown-item" href="barista.php">Requests</a>
                     <a class="dropdown-item" href="#" aria-disabled="true">Settings</a>
                     <a class="dropdown-item" href="#" aria-disabled="true">Profile</a>
                 </div>

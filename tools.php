@@ -17,10 +17,10 @@ function test_input($data)
 
 function OpenCon()
  {
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "admin";
-    $db = "coffeebuzz";
+    $dbhost = "sql12.freemysqlhosting.net";
+    $dbuser = "sql12293070";
+    $dbpass = "MW6cPxk6gA";
+    $db = "sql12293070";
     $conn = new mysqli($dbhost, $dbuser, $dbpass,$db) or die("Connect failed: %s\n". $conn -> error);
     
     return $conn;

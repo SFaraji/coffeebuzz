@@ -1,16 +1,8 @@
 <?php
-//print_r($_POST);
-//echo "<br/>APPLE<br/>";
+include_once('tools.php');
 
-//echo 'Hello ' . htmlspecialchars($_REQUEST["name"]) . '<br/>';
-//echo 'DETAILS: ' . htmlspecialchars($_REQUEST["details"]) . '<br/>';
-
-$servername = "localhost";
-$username = "root";
-$password = "admin";
-$db = "coffeebuzz";
 // Create connection
-$conn = mysqli_connect($servername, $username, $password,$db);
+$conn = OpenCon();
 
 $sql = "INSERT INTO `orders`(`name`, `details`, `price`) VALUES ('".$_POST['name']."','".$_POST['details']."','".$_POST['price']."')";
 //echo $sql."<br/>";

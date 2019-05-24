@@ -55,14 +55,14 @@ styleCLink();
 <?php
 
 	$conn = OpenCon();
-	$sql = "SELECT name, details FROM orders";
+	$sql = "SELECT name, details, price FROM orders";
 	$result = $conn->query($sql);
 	$i = 0; //order number
 	
 	while($row = $result->fetch_assoc()){
 		echo'<div class="col-md-4">
 			<div class="card"><div class="card"><button class="btn btn-primary" type="button" id="order-btn1" onclick = "show('.($i+1).')">Order ID: '.($i+1).'</button></div>
-			<div class="container" id="'.($i+1).'" style="display: none;"> <p><b>Customer Name: </b> '.$row["name"].'</p><p><b>Details: </b> '.$row["details"].'</p><button class="btn btn-secondry" type="button" style="margin-bottom: 15px;">Order Complete</button></div>
+			<div class="container" id="'.($i+1).'" style="display: none;"> <p><b>Customer Name: </b> '.$row["name"].'</p><p><b>Cost: </b> '.$row["price"].'</p><p><b>Details: </b> '.$row["details"].'</p><button class="btn btn-secondry" type="button" style="margin-bottom: 15px;">Order Complete</button></div>
 		</div></div><br/>';
 		$i++;
 	}

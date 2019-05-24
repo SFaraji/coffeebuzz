@@ -4,6 +4,7 @@ This repository includes all the required operation for creating a web applicati
 # Getting Started
 1. Clone the project ```git clone https://github.com/SFaraji/coffeebuzz.git```
 2. Alwyas check [Trello Board](https://trello.com/b/M33NhgOz/coffeebuzz-project)
+3. Check the [Live Website](https://sepm-deployment.herokuapp.com/)
 
 # Coding Convention
 1. Follow the naming convention camelCase. E.g. sepmAssignment

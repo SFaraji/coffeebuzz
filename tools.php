@@ -235,12 +235,8 @@ function createItem($item) {
 
 function getMenu() {
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "admin";
-    $db = "coffeebuzz";
     // Create connection
-    $conn = mysqli_connect($servername, $username, $password,$db);
+    $conn = OpenCon();
     
     $sql = "SELECT * FROM menu";
     $result = $conn->query($sql);
